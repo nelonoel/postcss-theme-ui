@@ -19,6 +19,7 @@ export default {
 	'color': 'colors',
 	'background-color': 'colors',
 	'border-color': 'colors',
+	'outline-color': 'colors',
 
 	'font-family': 'fonts',
 	'font-size': 'fontSizes',
