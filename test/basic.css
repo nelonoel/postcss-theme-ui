@@ -1,8 +1,17 @@
-h1 {
-	font-size: 6;
-	margin: 0 auto;
+body {
+	background-color: background;
+	color: text;
+	font-family: sans;
+	font-size: base;
+}
+
+button {
+	border-radius: 4;
 }
 
 .test {
+	color: primary ;
+	font-size: 1 !important;
+	margin: 0 auto;
 	padding: 0 3 3px;
 }
