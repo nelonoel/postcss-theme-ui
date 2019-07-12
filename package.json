@@ -1,0 +1,63 @@
+{
+  "name": "postcss-theme-ui",
+  "version": "1.0.0",
+  "description": "... in CSS",
+  "author": "Aaron Noel De Leon <aaronnoeldeleon@gmail.com>",
+  "license": "CC0-1.0",
+  "repository": "nelonoel/postcss-theme-ui",
+  "homepage": "https://github.com/nelonoel/postcss-theme-ui#readme",
+  "bugs": "https://github.com/nelonoel/postcss-theme-ui/issues",
+  "main": "index.js",
+  "module": "index.mjs",
+  "files": [
+    "index.js",
+    "index.js.map",
+    "index.mjs",
+    "index.mjs.map"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm test",
+    "pretest": "rollup --config .rollup.js --silent",
+    "test": "npm run test:js && npm run test:tape",
+    "test:js": "eslint src/{*,**/*}.js --cache --ignore-path .gitignore --quiet",
+    "test:tape": "postcss-tape"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "dependencies": {
+    "postcss": "^7.0.16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "postcss-tape": "^5.0.0",
+    "pre-commit": "^1.2.2",
+    "rollup": "^1.13.1",
+    "rollup-plugin-babel": "^4.3.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "extends": "eslint:recommended",
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "impliedStrict": true,
+      "sourceType": "module"
+    },
+    "root": true
+  },
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "postcss-theme-ui",
+    "theme-ui"
+  ]
+}
