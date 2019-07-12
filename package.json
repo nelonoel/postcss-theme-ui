@@ -1,7 +1,7 @@
 {
   "name": "postcss-theme-ui",
-  "version": "1.0.0",
-  "description": "... in CSS",
+  "version": "0.1.0",
+  "description": "Access Theme UI variables in CSS",
   "author": "Aaron Noel De Leon <aaronnoeldeleon@gmail.com>",
   "license": "CC0-1.0",
   "repository": "nelonoel/postcss-theme-ui",
