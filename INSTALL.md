@@ -103,9 +103,20 @@ const postcssThemeUi = require('postcss-theme-ui');
 
 module.exports = config => reactAppRewirePostcss(config, {
   plugins: () => [
-    postcssThemeUi(/* pluginOptions */)
+    postcssThemeUi(theme)
   ]
 });
+```
+
+Then replace `react-scripts` calls to `react-app-rewired` in your `package.json`:
+
+```
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  }
 ```
 
 ## Gulp

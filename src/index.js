@@ -4,8 +4,8 @@ import mapping from './mapping';
 
 import get from 'lodash/get';
 
-export default postcss.plugin('postcss-theme-ui', (options = { theme: {} }) => {
-	const theme = {...defaults, ...options.theme}
+export default postcss.plugin('postcss-theme-ui', (options = {}) => {
+	const theme = {...defaults, ...options}
 
 	const props = Object.keys(mapping)
 
