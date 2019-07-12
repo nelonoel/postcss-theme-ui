@@ -63,7 +63,9 @@ postcss([
 Accepts a `theme` object formatted based on [System UI Theme Specification](https://system-ui.com/theme/).
 
 ## Todo
- - [ ] Handle CSS property shortcuts, e.g: `font`, `background`, etc.
+ - [x] Retrieve value from theme object
+ - [x] Support negative space values
+ - [ ] Resolve CSS shorthand properties, e.g: `font`, `background`, `border`, `grid`, etc.
  - [ ] Responsive array properties (?)
 
 [cli-img]: https://img.shields.io/travis/nelonoel/postcss-theme-ui/master.svg
