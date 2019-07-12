@@ -4,14 +4,27 @@
 [![Build Status][cli-img]][cli-url]
 [![Support Chat][git-img]][git-url]
 
-[PostCSS theme-ui] lets you ... in CSS.
+[PostCSS theme-ui] lets you access Theme UI variables in your CSS.
 
 ```pcss
-.example { ... }
+/* Given a theme object containing {
+  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
+  space: [0, 4, 8, 16, 32, 64, 128, 256, 512]
+} */
+
+.example {
+  font-size: 6;
+  margin: 0 auto;
+  padding: 0 3 3px;
+}
 
 /* becomes */
 
-.example { ... }
+.example { 
+  font-size: 48px;
+  margin: 0 auto;
+  padding: 0 16px 3px;
+}
 ```
 
 ## Usage
@@ -47,8 +60,7 @@ postcss([
 | --- | --- | --- | --- | --- | --- |
 
 ## Options
-
-...
+Accepts a `theme` object formatted based on [System UI Theme Specification](https://system-ui.com/theme/).
 
 [cli-img]: https://img.shields.io/travis/nelonoel/postcss-theme-ui/master.svg
 [cli-url]: https://travis-ci.org/nelonoel/postcss-theme-ui
