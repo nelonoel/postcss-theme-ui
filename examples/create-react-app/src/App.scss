@@ -5,7 +5,7 @@
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
-  pointer-events: none;
+	pointer-events: none;
 }
 
 .App-header {
@@ -16,15 +16,15 @@
   align-items: center;
   justify-content: center;
   font-size: 4;
-  color: white;
+	color: white;
+
+	& code:hover {
+		color: primary;
+	}
 }
 
-.App-link {
-	background-color: primary;
-	border-radius: 2;
-	color: blue.1;
-	padding: 3 4;
-	text-decoration: none;
+.buttons {
+	display: flex;
 }
 
 @keyframes App-logo-spin {

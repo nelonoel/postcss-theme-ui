@@ -1,0 +1,23 @@
+.primary {
+	background-color: primary;
+	border: transparent solid 2px;
+	border-radius: 2;
+	color: blue.1;
+	margin: 1;
+	padding: 3 4;
+	text-decoration: none;
+	transition: .2s ease;
+}
+
+.primary:hover {
+	background-color: text;
+	border-color: transparent;
+	color: bg;
+}
+
+.secondary {
+	composes: primary;
+	background-color: transparent;
+	color: primary;
+	border-color: primary;
+}

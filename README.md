@@ -62,6 +62,10 @@ postcss([
 ## Options
 Accepts a `theme` object formatted based on [System UI Theme Specification](https://system-ui.com/theme/).
 
+## Todo
+ - [ ] Handle CSS property shortcuts, e.g: `font`, `background`, etc.
+ - [ ] Responsive array properties (?)
+
 [cli-img]: https://img.shields.io/travis/nelonoel/postcss-theme-ui/master.svg
 [cli-url]: https://travis-ci.org/nelonoel/postcss-theme-ui
 [git-img]: https://img.shields.io/badge/support-chat-blue.svg
