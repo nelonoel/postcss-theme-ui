@@ -13,3 +13,7 @@
 ### 0.3.0 (July 12, 2019)
 
 - Support negative space values
+
+### 0.4.0 (July 15, 2019)
+
+- Support custom theme fields via `theme()` CSS function
