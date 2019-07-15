@@ -1,9 +1,4 @@
-import postcss, {
-	decl as newDecl,
-	rule as newRule,
-	atRule as newAtRule,
-	list
-} from "postcss";
+import postcss, { decl as newDecl, parse, list } from "postcss";
 import get from "lodash/get";
 import valueParser from "postcss-value-parser";
 
@@ -14,19 +9,17 @@ const isThemeFunction = node =>
 	node.type === "function" && (node.value === "theme" || node.value === "th");
 
 const createMediaQuery = minWidth => {
-	const mq = newAtRule({
-		name: "media",
-		params: `screen and (min-width: ${minWidth})`
-	});
-	mq["nodes"] = [];
+	// const mq = newAtRule({
+	// 	name: "media",
+	// 	params: `screen and (min-width: ${minWidth})`
+	// });
+	const mq = parse(`\n@media screen and (min-width: ${minWidth}){\n}`).first;
+	// mq["nodes"] = [];
 	return mq;
 };
 
 const createSelector = selector => {
-	const decl = newRule({ selector });
-	decl.raws = {
-		before: "\n\t"
-	};
+	const decl = parse(`\n\t${selector} {\n\t}`).first;
 	return decl;
 };
 
