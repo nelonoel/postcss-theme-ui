@@ -1,4 +1,9 @@
-import postcss from "postcss";
+import postcss, {
+	decl as newDecl,
+	rule as newRule,
+	atRule as newAtRule,
+	list
+} from "postcss";
 import get from "lodash/get";
 import valueParser from "postcss-value-parser";
 
@@ -7,6 +12,23 @@ import mapping from "./mapping";
 
 const isThemeFunction = node =>
 	node.type === "function" && (node.value === "theme" || node.value === "th");
+
+const createMediaQuery = minWidth => {
+	const mq = newAtRule({
+		name: "media",
+		params: `screen and (min-width: ${minWidth})`
+	});
+	mq["nodes"] = [];
+	return mq;
+};
+
+const createSelector = selector => {
+	const decl = newRule({ selector });
+	decl.raws = {
+		before: "\n\t"
+	};
+	return decl;
+};
 
 const normalizeTheme = theme => {
 	const convertIntToPx = (...args) => {
@@ -47,19 +69,15 @@ export default postcss.plugin("postcss-theme-ui", (options = {}) => {
 	const theme = normalizeTheme({ ...defaults, ...options });
 	const props = Object.keys(mapping);
 
-	const checkPropMapping = decl => {
-		if (props.indexOf(decl.prop) < 0) {
-			return decl.value;
+	const checkPropMapping = (prop, value) => {
+		if (props.indexOf(prop) < 0) {
+			return value;
 		}
 
-		return valueParser(decl.value)
+		return valueParser(value)
 			.walk(node => {
 				if (node.type === "word") {
-					node.value = get(
-						theme,
-						`${mapping[decl.prop]}.${node.value}`,
-						node.value
-					);
+					node.value = get(theme, `${mapping[prop]}.${node.value}`, node.value);
 				}
 			})
 			.toString();
@@ -78,12 +96,50 @@ export default postcss.plugin("postcss-theme-ui", (options = {}) => {
 			.toString();
 	};
 
+	const processArrayValues = (decl, rule, mqs) => {
+		const [start, end] = [decl.value.indexOf("["), decl.value.indexOf("]")];
+		if (start < 0) {
+			return false;
+		}
+
+		const values = list.comma(decl.value.substring(start + 1, end));
+		const defaultValue = convertThemeValues(
+			checkPropMapping(decl.prop, values[0])
+		);
+
+		values.slice(1).map((th, i) => {
+			if (!mqs[i]) {
+				mqs[i] = createMediaQuery(get(theme, `breakpoints.${i}`));
+				mqs[i].nodes.push(createSelector(rule.selector));
+			}
+
+			let value = checkPropMapping(decl.prop, th);
+			value = convertThemeValues(th);
+
+			value = newDecl({ prop: decl.prop, value: value });
+			mqs[i].nodes[0].append(value);
+		});
+
+		return defaultValue;
+	};
+
 	return css => {
 		css.walkRules(rule => {
+			const mqs = [];
+
 			rule.walkDecls(decl => {
-				decl.value = checkPropMapping(decl);
+				const val = processArrayValues(decl, rule, mqs);
+				if (val) {
+					decl.value = val;
+					return;
+				}
+				decl.value = checkPropMapping(decl.prop, decl.value);
 				decl.value = convertThemeValues(decl.value);
 			});
+
+			if (mqs.length > 0) {
+				rule.parent.append(mqs);
+			}
 		});
 
 		css.walkAtRules("media", rule => {

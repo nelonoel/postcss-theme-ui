@@ -38,6 +38,6 @@ module.exports = {
 		"0 1px 1px rgba(0, 0, 0, 0.05)",
 		"0 1px 3px rgba(0, 0, 0, 0.1)"
 	],
-	sizes: ["auto", "48rem", "64rem"],
+	sizes: ["initial", "48rem", "64rem"],
 	space: [0, 4, 8, 16, 32, 64, 128, 256, 512]
 };
