@@ -6,10 +6,11 @@ body {
 }
 
 button {
-	border-radius: 9999px;
+	border-radius: 8px/9999px;
 }
 
 .test {
+	border-radius: 8px / 9999px;
 	color: #07c;
 	font-size: 1.25rem !important;
 	margin: 0 auto;

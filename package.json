@@ -1,6 +1,6 @@
 {
   "name": "postcss-theme-ui",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "PostCSS plugin for accessing Theme UI variables",
   "author": "Aaron Noel De Leon <aaronnoeldeleon@gmail.com>",
   "license": "CC0-1.0",
@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.14",
-    "postcss": "^7.0.16"
+    "postcss": "^7.0.16",
+    "postcss-value-parser": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

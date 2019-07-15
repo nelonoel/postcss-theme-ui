@@ -1,8 +1,9 @@
 import postcss from "postcss";
+import get from "lodash/get";
+import valueParser from "postcss-value-parser";
+
 import defaults from "./defaults";
 import mapping from "./mapping";
-
-import get from "lodash/get";
 
 const normalizeTheme = theme => {
 	const convertIntToPx = (...args) => {
@@ -44,32 +45,37 @@ export default postcss.plugin("postcss-theme-ui", (options = {}) => {
 	const props = Object.keys(mapping);
 
 	const checkPropMapping = decl => {
-		if (props.indexOf(decl.prop) > -1) {
-			decl.value = decl.value
-				.trim()
-				.split(" ")
-				.map(v => get(theme, `${mapping[decl.prop]}.${v}`, v))
-				.join(" ");
+		if (props.indexOf(decl.prop) < 0) {
+			return;
 		}
+
+		decl.value = valueParser(decl.value)
+			.walk(node => {
+				if (node.type === "word") {
+					node.value = get(
+						theme,
+						`${mapping[decl.prop]}.${node.value}`,
+						node.value
+					);
+				}
+			})
+			.toString();
 	};
 
 	const convertThemeValues = decl => {
-		decl.value = decl.value
-			.trim()
-			.split(" ")
-			.map(v => {
-				const themeNotation = "theme(";
-				const [start, end] = [v.indexOf(themeNotation), v.indexOf(")")];
-				if (start > -1) {
-					return get(
-						theme,
-						`${v.substring(start + themeNotation.length, end)}`,
-						v
-					);
+		decl.value = valueParser(decl.value)
+			.walk(node => {
+				if (
+					node.type === "function" &&
+					(node.value === "theme" || node.value === "th")
+				) {
+					node.type = "word";
+					node.value = node.nodes
+						.filter(arg => arg.type === "word")
+						.map(arg => get(theme, arg.value, arg.value))[0];
 				}
-				return v;
 			})
-			.join(" ");
+			.toString();
 	};
 
 	return css => {
