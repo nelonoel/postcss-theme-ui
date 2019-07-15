@@ -21,3 +21,7 @@
 ### 0.5.0 (July 15, 2019)
 
 - Support accessing theme values in media queries.
+
+### 0.6.0 (July 15, 2019)
+
+- Support responsive array values

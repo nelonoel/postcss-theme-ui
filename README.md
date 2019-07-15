@@ -1,23 +1,74 @@
-# PostCSS Theme UI [<img src="https://postcss.github.io/postcss/logo.svg" alt="PostCSS" width="90" height="90" align="right">][postcss]
-
 [![NPM Version][npm-img]][npm-url]
 [![Build Status][cli-img]][cli-url]
 [![Support Chat][git-img]][git-url]
 
 [PostCSS Theme UI] lets you access Theme UI variables in your CSS.
 
-```pcss
-/* Given a theme object containing {
+## Table of Contents
+
+- [Setup](#setup)
+- [Plugin Options](#options)
+- [Overview](#overview)
+- [Responsive Values](#responsive-values)
+- [Custom Design Tokens](#custom-design-tokens)
+
+## Setup
+
+Add [PostCSS Theme UI] to your project:
+
+```bash
+npm install postcss-theme-ui --save-dev
+```
+
+Use **PostCSS Theme UI** to process your CSS:
+
+```js
+const postcssThemeUI = require("postcss-theme-ui");
+
+postcssThemeUI.process(YOUR_CSS /*, processOptions, theme */);
+```
+
+Or use it as a [PostCSS] plugin:
+
+```js
+const postcss = require("postcss");
+const postcssThemeUI = require("postcss-theme-ui");
+const theme = require("./theme");
+
+postcss([postcssThemeUI(theme)]).process(YOUR_CSS /*, processOptions */);
+```
+
+**PostCSS Theme UI** runs in all Node environments, with special instructions for:
+
+| [Node](INSTALL.md#node) | [PostCSS CLI](INSTALL.md#postcss-cli) | [Webpack](INSTALL.md#webpack) | [Create React App](INSTALL.md#create-react-app) | [Gulp](INSTALL.md#gulp) | [Grunt](INSTALL.md#grunt) |
+| ----------------------- | ------------------------------------- | ----------------------------- | ----------------------------------------------- | ----------------------- | ------------------------- |
+
+
+## Options
+
+PostCSS Theme UI accepts an object formatted based on the [System UI Theme Specification](https://system-ui.com/theme/). See sample [theme object](test/theme.js).
+
+## Overview
+
+Given the following theme config:
+
+```js
+{
+  breakpoints: ["40em", "52em", "64em"],
   colors: { text: '#111', primary: '#06c', error: '#c30' },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512]
-} */
+}
+```
 
+[PostCSS Theme UI] maps CSS properties to the appropriate theme field. You can view the full prop mapping [here](src/mapping.js). It supports negative values (_for certain properties_) and conversion of unitless integers to `px`.
+
+```css
 .example {
-  color: primary;
-  font-size: 6;
-  margin: 0 auto -1;
-  padding: 0 3 3px;
+  color: primary; /* colors.primary */
+  font-size: 6; /* fontSizes[6] */
+  margin: 0 auto -1; /* space[0] auto -[space.1] */
+  padding: 0 3 3px; /* space[0] space[3] 3px */
 }
 
 /* becomes */
@@ -30,51 +81,68 @@
 }
 ```
 
-## Usage
+## Responsive Values
 
-Add [PostCSS Theme UI] to your project:
+It also provides support for _array values_ that map to your breakpoints for convenient responsive styling.
 
-```bash
-npm install postcss-theme-ui --save-dev
+```css
+.card {
+  max-width: [0, 1, 2];
+  padding: [1, 2];
+}
+
+/* becomes */
+
+.card {
+  background: #fff;
+  color: #07c;
+  max-width: initial;
+  padding: 4px;
+}
+@media screen and (min-width: 40em) {
+  .card {
+    max-width: 48rem;
+    padding: 8px;
+  }
+}
+@media screen and (min-width: 52em) {
+  .card {
+    max-width: 64rem;
+  }
+}
 ```
 
-Use **PostCSS Theme UI** to process your CSS:
+## Custom Design Tokens
+
+If you have design tokens currently not on the Theme UI spec, you can access them via the `theme()` or `th()` function.
+
+Say, you want to add a `gradients` field to your tokens:
 
 ```js
-const postcssThemeUi = require("postcss-theme-ui");
-
-postcssThemeUi.process(YOUR_CSS /*, processOptions, pluginOptions */);
+// theme config
+{
+  gradients: [
+    "linear-gradient(to right, #DD2476, #FF512F)",
+    "linear-gradient(to right, #FFF, #6DD5FA, #2980B9)"
+  ];
+}
 ```
 
-Or use it as a [PostCSS] plugin:
+Use them by calling the `theme()` or `th()` CSS functions.
 
-```js
-const postcss = require("postcss");
-const postcssThemeUi = require("postcss-theme-ui");
+```css
+.awesome-cta {
+  background: th(gradients.0);
+}
 
-postcss([postcssThemeUi(/* pluginOptions */)]).process(
-  YOUR_CSS /*, processOptions */
-);
+/* becomes */
+
+.awesome-cta {
+  background: linear-gradient(to right, #dd2476, #ff512f);
+}
 ```
 
-**PostCSS Theme UI** runs in all Node environments, with special instructions for:
-
-| [Node](INSTALL.md#node) | [PostCSS CLI](INSTALL.md#postcss-cli) | [Webpack](INSTALL.md#webpack) | [Create React App](INSTALL.md#create-react-app) | [Gulp](INSTALL.md#gulp) | [Grunt](INSTALL.md#grunt) |
-| ----------------------- | ------------------------------------- | ----------------------------- | ----------------------------------------------- | ----------------------- | ------------------------- |
-
-
-## Options
-
-Accepts an object formatted based on [System UI Theme Specification](https://system-ui.com/theme/). See sample [theme object](test/theme.js).
-
-## Todo
-
-- [x] Retrieve value from theme object
-- [x] Support negative space values
-- [x] Support custom theme fields via `theme()` or `th()` CSS function.
-- [x] Support accessing theme values in media queries.
-- [ ] Resolve CSS shorthand properties, e.g: `font`, `background`, `border`, `grid`, etc.
-- [ ] Responsive array properties (?)
+_Note:_ Since we're using PostCSS, we can conveniently plug [autoprefixer] in our toolchain as well.
 
 [cli-img]: https://img.shields.io/travis/nelonoel/postcss-theme-ui/master.svg
 [cli-url]: https://travis-ci.org/nelonoel/postcss-theme-ui
@@ -84,3 +152,4 @@ Accepts an object formatted based on [System UI Theme Specification](https://sys
 [npm-url]: https://www.npmjs.com/package/postcss-theme-ui
 [postcss]: https://github.com/postcss/postcss
 [postcss theme ui]: https://github.com/nelonoel/postcss-theme-ui
+[autoprefixer]: https://github.com/postcss/autoprefixer
