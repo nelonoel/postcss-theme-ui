@@ -6,12 +6,12 @@
 }
 @media screen and (min-width: 40em) {
 	.test {
-		max-width: 48rem;
-		padding: 8px;
+    max-width: 48rem;
+    padding: 8px;
 	}
 }
 @media screen and (min-width: 52em) {
 	.test {
-		max-width: 64rem;
+    max-width: 64rem;
 	}
 }

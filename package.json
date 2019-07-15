@@ -16,6 +16,7 @@
     "index.mjs.map"
   ],
   "scripts": {
+    "format": "prettier --write src/**/*.js",
     "prepublishOnly": "npm test",
     "pretest": "rollup --config .rollup.js --silent",
     "test": "npm run test:js && npm run test:tape",
@@ -71,7 +72,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,json,md}": [
+    "*.{js,json,md}": [
       "prettier --write",
       "git add"
     ],
