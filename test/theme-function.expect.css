@@ -1,0 +1,18 @@
+body {
+	background-color: #fff;
+	color: #000;
+	font-family: "IBM Plex Sans", sans-serif;
+	font-size: 16px;
+}
+
+button {
+	border-style: dashed;
+	border-radius: 9999px;
+}
+
+.test {
+	color: #07c;
+	font-size: 1.25rem !important;
+	margin: 0 auto;
+	padding: 0 16px 3px;
+}

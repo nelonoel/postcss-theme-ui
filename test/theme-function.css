@@ -1,0 +1,18 @@
+body {
+	background-color: theme(colors.background);
+	color: theme(colors.text);
+	font-family: theme(fonts.sans);
+	font-size: theme(fontSizes.base);
+}
+
+button {
+	border-style: theme(borderStyles.1);
+	border-radius: theme(radii.4);
+}
+
+.test {
+	color: theme(colors.primary);
+	font-size: theme(fontSizes.1) !important;
+	margin: 0 auto;
+	padding: 0 theme(space.3) 3px;
+}

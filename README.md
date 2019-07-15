@@ -20,7 +20,7 @@
 
 /* becomes */
 
-.example { 
+.example {
   font-size: 48px;
   margin: 0 auto;
   padding: 0 16px 3px;
@@ -38,7 +38,7 @@ npm install postcss-theme-ui --save-dev
 Use **PostCSS theme-ui** to process your CSS:
 
 ```js
-const postcssThemeUi = require('postcss-theme-ui');
+const postcssThemeUi = require("postcss-theme-ui");
 
 postcssThemeUi.process(YOUR_CSS /*, processOptions, pluginOptions */);
 ```
@@ -46,27 +46,31 @@ postcssThemeUi.process(YOUR_CSS /*, processOptions, pluginOptions */);
 Or use it as a [PostCSS] plugin:
 
 ```js
-const postcss = require('postcss');
-const postcssThemeUi = require('postcss-theme-ui');
+const postcss = require("postcss");
+const postcssThemeUi = require("postcss-theme-ui");
 
-postcss([
-  postcssThemeUi(/* pluginOptions */)
-]).process(YOUR_CSS /*, processOptions */);
+postcss([postcssThemeUi(/* pluginOptions */)]).process(
+  YOUR_CSS /*, processOptions */
+);
 ```
 
 **PostCSS theme-ui** runs in all Node environments, with special instructions for:
 
 | [Node](INSTALL.md#node) | [PostCSS CLI](INSTALL.md#postcss-cli) | [Webpack](INSTALL.md#webpack) | [Create React App](INSTALL.md#create-react-app) | [Gulp](INSTALL.md#gulp) | [Grunt](INSTALL.md#grunt) |
-| --- | --- | --- | --- | --- | --- |
+| ----------------------- | ------------------------------------- | ----------------------------- | ----------------------------------------------- | ----------------------- | ------------------------- |
+
 
 ## Options
+
 Accepts a `theme` object formatted based on [System UI Theme Specification](https://system-ui.com/theme/).
 
 ## Todo
- - [x] Retrieve value from theme object
- - [x] Support negative space values
- - [ ] Resolve CSS shorthand properties, e.g: `font`, `background`, `border`, `grid`, etc.
- - [ ] Responsive array properties (?)
+
+- [x] Retrieve value from theme object
+- [x] Support negative space values
+- [x] Custom theme fields via `theme()` CSS function.
+- [ ] Resolve CSS shorthand properties, e.g: `font`, `background`, `border`, `grid`, etc.
+- [ ] Responsive array properties (?)
 
 [cli-img]: https://img.shields.io/travis/nelonoel/postcss-theme-ui/master.svg
 [cli-url]: https://travis-ci.org/nelonoel/postcss-theme-ui
@@ -74,6 +78,5 @@ Accepts a `theme` object formatted based on [System UI Theme Specification](http
 [git-url]: https://gitter.im/postcss/postcss
 [npm-img]: https://img.shields.io/npm/v/postcss-theme-ui.svg
 [npm-url]: https://www.npmjs.com/package/postcss-theme-ui
-
-[PostCSS]: https://github.com/postcss/postcss
-[PostCSS theme-ui]: https://github.com/nelonoel/postcss-theme-ui
+[postcss]: https://github.com/postcss/postcss
+[postcss theme-ui]: https://github.com/nelonoel/postcss-theme-ui

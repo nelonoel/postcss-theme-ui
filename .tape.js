@@ -9,6 +9,12 @@ module.exports = {
 		message: "supports negative values",
 		options: theme
 	},
+	"theme-function": {
+		message: "supports theme function",
+		options: Object.assign(theme, {
+			borderStyles: ["solid", "dashed"]
+		})
+	},
 	"shorthand-props": {
 		message: "supports CSS shorthand props",
 		options: theme
