@@ -1,41 +1,44 @@
-# PostCSS theme-ui [<img src="https://postcss.github.io/postcss/logo.svg" alt="PostCSS" width="90" height="90" align="right">][postcss]
+# PostCSS Theme UI [<img src="https://postcss.github.io/postcss/logo.svg" alt="PostCSS" width="90" height="90" align="right">][postcss]
 
 [![NPM Version][npm-img]][npm-url]
 [![Build Status][cli-img]][cli-url]
 [![Support Chat][git-img]][git-url]
 
-[PostCSS theme-ui] lets you access Theme UI variables in your CSS.
+[PostCSS Theme UI] lets you access Theme UI variables in your CSS.
 
 ```pcss
 /* Given a theme object containing {
+  colors: { text: '#111', primary: '#06c', error: '#c30' },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512]
 } */
 
 .example {
+  color: primary;
   font-size: 6;
-  margin: 0 auto;
+  margin: 0 auto -1;
   padding: 0 3 3px;
 }
 
 /* becomes */
 
 .example {
+  color: #06c;
   font-size: 48px;
-  margin: 0 auto;
+  margin: 0 auto -4px;
   padding: 0 16px 3px;
 }
 ```
 
 ## Usage
 
-Add [PostCSS theme-ui] to your project:
+Add [PostCSS Theme UI] to your project:
 
 ```bash
 npm install postcss-theme-ui --save-dev
 ```
 
-Use **PostCSS theme-ui** to process your CSS:
+Use **PostCSS Theme UI** to process your CSS:
 
 ```js
 const postcssThemeUi = require("postcss-theme-ui");
@@ -54,7 +57,7 @@ postcss([postcssThemeUi(/* pluginOptions */)]).process(
 );
 ```
 
-**PostCSS theme-ui** runs in all Node environments, with special instructions for:
+**PostCSS Theme UI** runs in all Node environments, with special instructions for:
 
 | [Node](INSTALL.md#node) | [PostCSS CLI](INSTALL.md#postcss-cli) | [Webpack](INSTALL.md#webpack) | [Create React App](INSTALL.md#create-react-app) | [Gulp](INSTALL.md#gulp) | [Grunt](INSTALL.md#grunt) |
 | ----------------------- | ------------------------------------- | ----------------------------- | ----------------------------------------------- | ----------------------- | ------------------------- |
@@ -62,7 +65,7 @@ postcss([postcssThemeUi(/* pluginOptions */)]).process(
 
 ## Options
 
-Accepts a `theme` object formatted based on [System UI Theme Specification](https://system-ui.com/theme/).
+Accepts an object formatted based on [System UI Theme Specification](https://system-ui.com/theme/). See sample [theme object](test/theme.js).
 
 ## Todo
 
@@ -79,4 +82,4 @@ Accepts a `theme` object formatted based on [System UI Theme Specification](http
 [npm-img]: https://img.shields.io/npm/v/postcss-theme-ui.svg
 [npm-url]: https://www.npmjs.com/package/postcss-theme-ui
 [postcss]: https://github.com/postcss/postcss
-[postcss theme-ui]: https://github.com/nelonoel/postcss-theme-ui
+[postcss theme ui]: https://github.com/nelonoel/postcss-theme-ui
