@@ -6,7 +6,8 @@ body {
 }
 
 button {
-	border: th(colors.primary) theme(borderStyles.1) theme(space.1);
+	border: th(colors.primary) theme(borderStyles.1) theme(space.1)
+		th(colors.secondary) th(borderStyles.0) th(space.1);
 	border-radius: theme(radii.2) / th(radii.4);
 }
 

@@ -6,8 +6,8 @@ body {
 }
 
 button {
-	border: #07c dashed 4px;
-	border-radius: 8px/9999px;
+	border: #07c dashed 4px #05a solid 4px;
+	border-radius: 8px / 9999px;
 }
 
 .test {
