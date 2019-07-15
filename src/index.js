@@ -5,6 +5,9 @@ import valueParser from "postcss-value-parser";
 import defaults from "./defaults";
 import mapping from "./mapping";
 
+const isThemeFunction = node =>
+	node.type === "function" && (node.value === "theme" || node.value === "th");
+
 const normalizeTheme = theme => {
 	const convertIntToPx = (...args) => {
 		args.forEach(scale => {
@@ -46,10 +49,10 @@ export default postcss.plugin("postcss-theme-ui", (options = {}) => {
 
 	const checkPropMapping = decl => {
 		if (props.indexOf(decl.prop) < 0) {
-			return;
+			return decl.value;
 		}
 
-		decl.value = valueParser(decl.value)
+		return valueParser(decl.value)
 			.walk(node => {
 				if (node.type === "word") {
 					node.value = get(
@@ -62,13 +65,10 @@ export default postcss.plugin("postcss-theme-ui", (options = {}) => {
 			.toString();
 	};
 
-	const convertThemeValues = decl => {
-		decl.value = valueParser(decl.value)
+	const convertThemeValues = value => {
+		return valueParser(value)
 			.walk(node => {
-				if (
-					node.type === "function" &&
-					(node.value === "theme" || node.value === "th")
-				) {
+				if (isThemeFunction(node)) {
 					node.type = "word";
 					node.value = node.nodes
 						.filter(arg => arg.type === "word")
@@ -81,9 +81,13 @@ export default postcss.plugin("postcss-theme-ui", (options = {}) => {
 	return css => {
 		css.walkRules(rule => {
 			rule.walkDecls(decl => {
-				checkPropMapping(decl);
-				convertThemeValues(decl);
+				decl.value = checkPropMapping(decl);
+				decl.value = convertThemeValues(decl.value);
 			});
+		});
+
+		css.walkAtRules("media", rule => {
+			rule.params = convertThemeValues(rule.params);
 		});
 	};
 });

@@ -15,6 +15,10 @@ module.exports = {
 			borderStyles: ["solid", "dashed"]
 		})
 	},
+	"media-queries": {
+		message: "supports media queries",
+		options: theme
+	},
 	"shorthand-props": {
 		message: "supports CSS shorthand props",
 		options: theme

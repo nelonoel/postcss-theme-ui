@@ -17,3 +17,7 @@
 ### 0.4.0 (July 15, 2019)
 
 - Support custom theme fields via `theme()` CSS function
+
+### 0.5.0 (July 15, 2019)
+
+- Support accessing theme values in media queries.

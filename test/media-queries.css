@@ -1,0 +1,11 @@
+@media (min-width: th(breakpoints.1)) {
+	.test {
+		margin: 0 2;
+	}
+}
+
+@media screen and (min-width: th(breakpoints.0)) {
+	.test {
+		margin: 0 3;
+	}
+}

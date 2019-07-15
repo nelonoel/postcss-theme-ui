@@ -1,0 +1,11 @@
+@media (min-width: 52em) {
+	.test {
+		margin: 0 8px;
+	}
+}
+
+@media screen and (min-width: 40em) {
+	.test {
+		margin: 0 16px;
+	}
+}
