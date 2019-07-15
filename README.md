@@ -71,7 +71,7 @@ Accepts an object formatted based on [System UI Theme Specification](https://sys
 
 - [x] Retrieve value from theme object
 - [x] Support negative space values
-- [x] Custom theme fields via `theme()` CSS function.
+- [x] Custom theme fields via `theme()` or `th()` CSS function.
 - [ ] Resolve CSS shorthand properties, e.g: `font`, `background`, `border`, `grid`, etc.
 - [ ] Responsive array properties (?)
 
