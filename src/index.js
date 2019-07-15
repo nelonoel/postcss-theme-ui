@@ -13,13 +13,14 @@ const createMediaQuery = minWidth => {
 	// 	name: "media",
 	// 	params: `screen and (min-width: ${minWidth})`
 	// });
-	const mq = parse(`\n@media screen and (min-width: ${minWidth}){\n}`).first;
+	const mq = parse(`\n@media screen and (min-width: ${minWidth}) {\n}`).first;
 	// mq["nodes"] = [];
 	return mq;
 };
 
 const createSelector = selector => {
 	const decl = parse(`\n\t${selector} {\n\t}`).first;
+	decl.raws["semicolon"] = true;
 	return decl;
 };
 
