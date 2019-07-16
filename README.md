@@ -87,6 +87,7 @@ It also provides support for _array values_ that map to your breakpoints for con
 
 ```css
 .card {
+  color: primary;
   max-width: [0, 1, 2];
   padding: [1, 2];
 }
@@ -94,7 +95,6 @@ It also provides support for _array values_ that map to your breakpoints for con
 /* becomes */
 
 .card {
-  background: #fff;
   color: #07c;
   max-width: initial;
   padding: 4px;
