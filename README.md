@@ -11,6 +11,7 @@
 - [Overview](#overview)
 - [Responsive Values](#responsive-values)
 - [Custom Design Tokens](#custom-design-tokens)
+- [Caveats](#caveats)
 
 ## Setup
 
@@ -56,7 +57,12 @@ Given the following theme config:
 {
   breakpoints: ["40em", "52em", "64em"],
   colors: { text: '#111', primary: '#06c', error: '#c30' },
+	fonts: {
+		sans: '"IBM Plex Sans", sans-serif',
+		serif: '"IBM Plex Serif", serif'
+	},
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
+  sizes: ["initial", "48rem", "64rem"],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512]
 }
 ```
@@ -67,7 +73,7 @@ Given the following theme config:
 .example {
   color: primary; /* colors.primary */
   font-size: 6; /* fontSizes[6] */
-  margin: 0 auto -1; /* space[0] auto -[space.1] */
+  margin: 0 auto -1; /* space[0] auto -space[1] */
   padding: 0 3 3px; /* space[0] space[3] 3px */
 }
 
@@ -87,9 +93,9 @@ It also provides support for _array values_ that map to your breakpoints for con
 
 ```css
 .card {
-  color: primary;
-  max-width: [0, 1, 2];
-  padding: [1, 2];
+  color: primary; /* colors.primary */
+  max-width: [0, 1, 2]; /* [sizes] */
+  padding: [1, 2]; /* [space] */
 }
 
 /* becomes */
@@ -142,7 +148,27 @@ Use them by calling the `theme()` or `th()` CSS functions.
 }
 ```
 
-_Note:_ Since we're using PostCSS, we can conveniently plug [autoprefixer] in our toolchain as well.
+**Note:** Since we're using PostCSS, we can conveniently plug [autoprefixer] in our toolchain as well.
+
+## Caveats
+
+1. Short hand CSS properties such as `font`, `background`, and `border` will only map to one theme field as defined [here](src/mapping.js). However, You can still access theme variables via the `theme` function.
+
+```css
+.btn {
+  border: theme(colors.primary) 1; /* colors.primary borders[1] */
+  font: sans theme(fontSizes.1); /* fonts.sans fontSizes[1] */
+}
+/* becomes */
+
+.btn {
+  border: #07c solid 1px;
+  font: "IBM Plex Sans", sans-serif 1rem;
+}
+```
+
+2. [Responsive Values](#responsive-values) can only be used in _one property at a time_. Also, it cannot contain calls to the `theme` function at the moment.
+3. Editor syntax highlighting is still a work in progress.
 
 [cli-img]: https://img.shields.io/travis/nelonoel/postcss-theme-ui/master.svg
 [cli-url]: https://travis-ci.org/nelonoel/postcss-theme-ui
