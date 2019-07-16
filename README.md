@@ -159,6 +159,7 @@ Use them by calling the `theme()` or `th()` CSS functions.
   border: theme(colors.primary) 1; /* colors.primary borders[1] */
   font: sans theme(fontSizes.1); /* fonts.sans fontSizes[1] */
 }
+
 /* becomes */
 
 .btn {
