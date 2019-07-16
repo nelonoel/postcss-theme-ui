@@ -1,0 +1,5 @@
+.test {
+	background: fixed background;
+	border: th(colors.primary) 1;
+	font: sans th(fontSizes.0);
+}
