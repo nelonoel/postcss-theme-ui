@@ -26,5 +26,11 @@ module.exports = {
 	"array-as-props": {
 		message: "supports array as props",
 		options: theme
+	},
+	"theme-function-in-arrays": {
+		message: "supports theme functions in arrays",
+		options: Object.assign(theme, {
+			borderStyles: ["solid", "dashed"]
+		})
 	}
 };

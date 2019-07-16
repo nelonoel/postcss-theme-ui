@@ -1,6 +1,7 @@
 .test {
-	background: background;
+	background: [background, primary];
 	color: primary;
+	margin: 1 [2,3];
 	max-width: [0, 1, 2];
-	padding: [1, 2];
+	padding: [1, 2] [2, 3];
 }

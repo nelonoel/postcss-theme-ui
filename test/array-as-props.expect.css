@@ -1,13 +1,16 @@
 .test {
 	background: #fff;
 	color: #07c;
+	margin: 4px 8px;
 	max-width: initial;
-	padding: 4px;
+	padding: 4px 8px;
 }
 @media screen and (min-width: 40em) {
 	.test {
+    background: #07c;
+    margin: 4px 16px;
     max-width: 48rem;
-    padding: 8px;
+    padding: 8px 16px;
 	}
 }
 @media screen and (min-width: 52em) {

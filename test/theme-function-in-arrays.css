@@ -1,0 +1,5 @@
+.test {
+	background: [background, primary];
+	border: primary [1, 2, th(borderStyles.1) 1px];
+	border-style: [th(borderStyles.0), none, theme(borderStyles.1)];
+}
