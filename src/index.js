@@ -22,7 +22,7 @@ export default postcss.plugin("postcss-theme-ui", (options = {}) => {
 					selector: rule.selector
 				});
 			});
-			rule.parent.append(mqs);
+			rule.parent.append(mqs.filter(mq => mq.nodes[0].nodes.length > 0));
 		});
 	};
 });
