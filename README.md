@@ -89,7 +89,7 @@ Given the following theme config:
 
 ## Responsive Values
 
-It also provides support for _array values_ that map to your breakpoints for convenient responsive styling. You can use call the `theme` function inside arrays, or use `null` to skip breakpoints.
+It also provides support for _array values_ that map to your _breakpoints_ for convenient responsive styling. You can call the `theme` function inside arrays, or use `null` to skip breakpoints. See [Caveats](#caveats) for some limitations.
 
 ```css
 .card {
