@@ -20,7 +20,7 @@
 
 ### 0.5.0 (July 15, 2019)
 
-- Support accessing theme values in media queries.
+- Support accessing theme values in media queries
 
 ### 0.6.0 (July 15, 2019)
 
@@ -33,3 +33,7 @@
 ### 0.8.0 (July 17, 2019)
 
 - Support theme value calls inside arrays
+
+### 0.9.0 (July 17, 2019)
+
+- Support null values in arrays to skip breakpoints

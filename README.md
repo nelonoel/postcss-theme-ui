@@ -89,25 +89,27 @@ Given the following theme config:
 
 ## Responsive Values
 
-It also provides support for _array values_ that map to your breakpoints for convenient responsive styling.
+It also provides support for _array values_ that map to your breakpoints for convenient responsive styling. You can use call the `theme` function inside arrays, or use `null` to skip breakpoints.
 
 ```css
 .card {
+  border: th(colors.primary) [1, 2]; /* colors.primary [solid 1px, solid 2px] */
   color: primary; /* colors.primary */
-  max-width: [0, 1, 2]; /* [sizes] */
+  max-width: [0, null, 2]; /* [sizes], `null` is used to skip breakpoints */
   padding: [1, 2]; /* [space] */
 }
 
 /* becomes */
 
 .card {
+  border: #07c solid 1px;
   color: #07c;
   max-width: initial;
   padding: 4px;
 }
 @media screen and (min-width: 40em) {
   .card {
-    max-width: 48rem;
+    border: #07c solid 2px;
     padding: 8px;
   }
 }
@@ -171,9 +173,22 @@ Use them by calling the `theme()` or `th()` CSS functions.
 2. [Responsive Values](#responsive-values) cannot be nested and can only be balanced when used more than once per property. For example, the following won't work at the moment. 😉
 
 ```
-.impossible {
+.unsupported {
   margin: [0, 1] [0, 1, 2];
   padding: [0, [1, 2]];
+}
+
+.fixed {
+  margin: [0, 1, 1] [0, 1, 2];
+  padding: 0 [1, 2];
+}
+
+.equivalent {
+  margin-top: [0, 1];
+  margin-right: [0, 1, 2];
+  margin-bottom: [0, 1];
+  margin-left: [0, 1, 2];
+  padding: 0 [1, 2];
 }
 ```
 
