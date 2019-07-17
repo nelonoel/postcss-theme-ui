@@ -28,23 +28,25 @@ const createMediaQueries = ({ value, mqs, prop, selector, theme }) => {
 				if (!props[prop]) {
 					props[prop] = [];
 				}
-				props[prop][i] = createDeclaration({
-					prop,
-					value: cloneDeep(value)
-						.walk(n => {
-							if (isArray(n)) {
-								n.type = "word";
-								n.value = getValue({
-									rawValue: n.nodes[i],
-									nested: true,
-									prop,
-									theme
-								});
-								n.nodes = [];
-							}
-						})
-						.toString()
-				});
+				if (v !== "null") {
+					props[prop][i] = createDeclaration({
+						prop,
+						value: cloneDeep(value)
+							.walk(n => {
+								if (isArray(n)) {
+									n.type = "word";
+									n.value = getValue({
+										rawValue: n.nodes[i],
+										nested: true,
+										prop,
+										theme
+									});
+									n.nodes = [];
+								}
+							})
+							.toString()
+					});
+				}
 			});
 		}
 	});
@@ -57,7 +59,8 @@ const createMediaQueries = ({ value, mqs, prop, selector, theme }) => {
 };
 
 const convertArrays = ({ value, ...args }) => {
-	createMediaQueries({ value: cloneDeep(value), ...args });
+	value.nodes.length > 0 &&
+		createMediaQueries({ value: cloneDeep(value), ...args });
 
 	value.walk(node => {
 		if (isArray(node)) {
