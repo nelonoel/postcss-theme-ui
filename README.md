@@ -168,7 +168,15 @@ Use them by calling the `theme()` or `th()` CSS functions.
 }
 ```
 
-2. [Responsive Values](#responsive-values) can only be used in _one property at a time_. Also, it cannot contain calls to the `theme` function at the moment.
+2. [Responsive Values](#responsive-values) cannot be nested and can only be balanced when used more than once per property. For example, the following won't work at the moment. 😉
+
+```
+.impossible {
+  margin: [0, 1] [0, 1, 2];
+  padding: [0, [1, 2]];
+}
+```
+
 3. Editor syntax highlighting is still a work in progress.
 
 [cli-img]: https://img.shields.io/travis/nelonoel/postcss-theme-ui/master.svg
