@@ -1,47 +1,65 @@
-import valueParser from "postcss-value-parser";
-
-const fnToStr = fn => {
-	return `${fn.value}(${fn.nodes
-		.filter(node => node.type === "word")
-		.map(node => node.value)
-		.join("")})`;
-};
+import valueParser, { stringify } from "postcss-value-parser";
 
 const parse = value => {
 	const parser = valueParser(value);
 	// console.log('\nBEFORE\n', parser.nodes) // eslint-disable-line
 
 	let inArray = false;
+	let parentNode = {};
 	let nodes = [];
 	let arrayNode = [];
+	let item = [];
 	let val = "";
 
 	parser.nodes.map(node => {
 		const [start, end] = [node.value.indexOf("["), node.value.indexOf("]")];
 
+		if ((start >= 0) & (end >= 0)) {
+			node.value = node.value.substring(start + 1, end);
+			nodes.push(node);
+			return;
+		}
+
 		if (start >= 0) {
 			inArray = true;
-			val = node.value.substr(start + 1);
-			if (val === "th" || val === "theme") {
-				arrayNode.push(fnToStr({ ...node, value: val }));
-			} else {
-				arrayNode.push(val);
-			}
-			node.type = "array";
-			node.value = arrayNode;
+			val = node.value.substring(start + 1);
+			item.push({ ...node, value: val });
+			parentNode = node;
 			nodes.push(node);
-		} else if (end >= 0) {
-			inArray = false;
-			val = node.value.substr(0, end);
-			// arrayNode.push({ ...node, value: val })
-			val.length > 0 && arrayNode.push(val);
-			arrayNode = [];
-		} else if (inArray) {
-			node.type === "word" && arrayNode.push(node.value);
-			node.type === "function" && arrayNode.push(fnToStr(node));
-		} else {
-			nodes.push(node);
+
+			return;
 		}
+
+		if (end >= 0) {
+			inArray = false;
+			val = node.value.substring(0, end);
+			val.length > 0 && item.push({ ...node, value: val });
+			arrayNode.push(stringify(item));
+
+			if (arrayNode.length > 1) {
+				parentNode.type = "array";
+				parentNode.value = arrayNode[0];
+				parentNode.nodes = arrayNode.slice(1);
+			}
+
+			item = [];
+			arrayNode = [];
+
+			return;
+		}
+
+		if (inArray) {
+			if (node.value === ",") {
+				item.length > 0 && arrayNode.push(stringify(item));
+				item = [];
+			} else {
+				item.push(node);
+			}
+
+			return;
+		}
+
+		nodes.push(node);
 	});
 
 	// console.log('\nAFTER\n', nodes) // eslint-disable-line

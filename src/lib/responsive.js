@@ -20,8 +20,7 @@ const createMediaQueries = ({ value, mqs, prop, selector, theme }) => {
 	const props = {};
 	value.nodes.map(node => {
 		if (isArray(node)) {
-			node.value = node.value.slice(1);
-			node.value.map((v, i) => {
+			node.nodes.map((v, i) => {
 				if (!mqs[i]) {
 					mqs[i] = createMediaQuery(get(theme, `breakpoints.${i}`));
 					mqs[i].nodes.push(createSelector(selector));
@@ -34,12 +33,14 @@ const createMediaQueries = ({ value, mqs, prop, selector, theme }) => {
 					value: cloneDeep(value)
 						.walk(n => {
 							if (isArray(n)) {
+								n.type = "word";
 								n.value = getValue({
-									rawValue: n.value[i],
+									rawValue: n.nodes[i],
 									nested: true,
 									prop,
 									theme
 								});
+								n.nodes = [];
 							}
 						})
 						.toString()
@@ -61,7 +62,7 @@ const convertArrays = ({ value, ...args }) => {
 	value.walk(node => {
 		if (isArray(node)) {
 			node.type = "word";
-			node.value = getValue({ rawValue: node.value[0], nested: true, ...args });
+			node.value = getValue({ rawValue: node.value, nested: true, ...args });
 		}
 	});
 

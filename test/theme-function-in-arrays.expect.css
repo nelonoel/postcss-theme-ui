@@ -1,13 +1,8 @@
 .test {
-	border-style: solid;
+	border: #07c dashed 1px;
 }
 @media screen and (min-width: 40em) {
 	.test {
-    border-style: none;
-	}
-}
-@media screen and (min-width: 52em) {
-	.test {
-    border-style: dashed;
+    border: #05a solid 1px;
 	}
 }
