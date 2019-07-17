@@ -1,7 +1,8 @@
 .test {
 	background: [background, primary];
-	color: primary;
+	border: [th(colors.primary), th(colors.background)] [th(borderStyles.1) 1px, 1];
+	color: text;
 	margin: 1 [2,3];
-	max-width: [0, 1, 2];
+	max-width: [0, 1, null, 2];
 	padding: [1, 2] [2, 3];
 }

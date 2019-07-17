@@ -1,6 +1,7 @@
 .test {
 	background: #fff;
-	color: #07c;
+	border: #07c dashed 1px;
+	color: #000;
 	margin: 4px 8px;
 	max-width: initial;
 	padding: 4px 8px;
@@ -8,12 +9,13 @@
 @media screen and (min-width: 40em) {
 	.test {
     background: #07c;
+    border: #fff solid 1px;
     margin: 4px 16px;
     max-width: 48rem;
     padding: 8px 16px;
 	}
 }
-@media screen and (min-width: 52em) {
+@media screen and (min-width: 64em) {
 	.test {
     max-width: 64rem;
 	}
