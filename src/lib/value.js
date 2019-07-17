@@ -32,13 +32,9 @@ const convertThemeFunction = ({ value, theme }) => {
 };
 
 const getValue = ({ rawValue, nested, ...args }) => {
-	// console.log('RAW VALUE', rawValue) // eslint-disable-line
 	let value = parse(rawValue);
-	// console.log('PARSED VALUE', value) //eslint-disable-line
 	value = convertMappedProps({ value, ...args });
-	// console.log('CONVERT MAPPED PROPS', value.toString()) //eslint-disable-line
 	value = convertThemeFunction({ value, ...args });
-	// console.log('CONVERT THEMES', value.toString()) //eslint-disable-line
 	value = nested ? value : convertArrays({ value, ...args });
 
 	return value.toString();

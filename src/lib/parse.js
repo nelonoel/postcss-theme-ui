@@ -2,7 +2,6 @@ import valueParser, { stringify } from "postcss-value-parser";
 
 const parse = value => {
 	const parser = valueParser(value);
-	// console.log('\nBEFORE\n', parser.nodes) // eslint-disable-line
 
 	let inArray = false;
 	let parentNode = {};
@@ -61,8 +60,6 @@ const parse = value => {
 
 		nodes.push(node);
 	});
-
-	// console.log('\nAFTER\n', nodes) // eslint-disable-line
 	parser.nodes = nodes;
 	return parser;
 };
