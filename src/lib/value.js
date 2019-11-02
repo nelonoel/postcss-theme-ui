@@ -8,14 +8,21 @@ const props = Object.keys(mapping);
 const isThemeFunction = node =>
 	node.type === "function" && (node.value === "theme" || node.value === "th");
 
+const isMapped = (prop = "") => props.indexOf(prop) >= 0;
+const isColor = (prop = "") => prop.indexOf("color") >= 0;
+
 const convertMappedProps = ({ value, theme, prop }) => {
-	if (prop && props.indexOf(prop) < 0) {
+	if (!(isMapped(prop) || isColor(prop))) {
 		return value;
 	}
 
 	return value.walk(node => {
 		if (node.type === "word") {
-			node.value = get(theme, `${mapping[prop]}.${node.value}`, node.value);
+			node.value = get(
+				theme,
+				`${isColor(prop) ? "colors" : mapping[prop]}.${node.value}`,
+				node.value
+			);
 		}
 	});
 };

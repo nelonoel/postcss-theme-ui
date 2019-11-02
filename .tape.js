@@ -5,6 +5,10 @@ module.exports = {
 		message: "supports basic value retrieval",
 		options: theme
 	},
+	colors: {
+		message: "supports color props",
+		options: theme
+	},
 	"negative-values": {
 		message: "supports negative values",
 		options: theme

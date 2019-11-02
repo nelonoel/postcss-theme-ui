@@ -17,10 +17,6 @@ export default {
 	"grid-column-gap": "space",
 
 	background: "colors",
-	"background-color": "colors",
-	"border-color": "colors",
-	color: "colors",
-	"outline-color": "colors",
 
 	font: "fonts",
 	"font-family": "fonts",

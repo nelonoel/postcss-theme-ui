@@ -1,0 +1,7 @@
+.test {
+	background: background;
+	-webkit-text-fill-color: text;
+	outline-color: secondary;
+	border-bottom-color: primary;
+	color: text;
+}
