@@ -1,4 +1,3 @@
-[![NPM Version][npm-img]][npm-url]
 [![Build Status][cli-img]][cli-url]
 [![Support Chat][git-img]][git-url]
 
@@ -6,12 +5,17 @@
 
 ## Table of Contents
 
+- [Introduction](#introduction)
 - [Setup](#setup)
 - [Plugin Options](#options)
 - [Overview](#overview)
 - [Responsive Values](#responsive-values)
 - [Custom Design Tokens](#custom-design-tokens)
 - [Caveats](#caveats)
+
+## Introduction
+This package is still **experimental**, but mostly functional with some [caveats](#caveats) outlined below.
+Developer ergonomics may still change based on community feedback. Feel free to file a PR!
 
 ## Setup
 
