@@ -61,10 +61,10 @@ Given the following theme config:
 {
   breakpoints: ["40em", "52em", "64em"],
   colors: { text: '#111', primary: '#06c', error: '#c30' },
-	fonts: {
-		sans: '"IBM Plex Sans", sans-serif',
-		serif: '"IBM Plex Serif", serif'
-	},
+  fonts: {
+    sans: '"IBM Plex Sans", sans-serif',
+    serif: '"IBM Plex Serif", serif'
+  },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 72],
   sizes: ["initial", "48rem", "64rem"],
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512]
